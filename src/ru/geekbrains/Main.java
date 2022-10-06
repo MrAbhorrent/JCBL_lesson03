@@ -1,13 +1,13 @@
 package ru.geekbrains;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
-    String msgForExit = "Повторить игру еще раз? 1 – да / 0 – нет";
+    private static final String msgForExit = "Повторить игру еще раз? 1 – да / 0 – нет";
+    private static final String txtCongratulation = "Поздравляем вы угадали число.";
+    private static final String txtUnidentifiedValue = "Вы ввели не определенное значение";
     public static boolean flagEndGame;
     public static int TopBorder = 9;
     public static int AttemptCount = 3;
@@ -36,13 +36,13 @@ public class Main {
                 if (AnswerNumber == randomNumber) {
                     //
                     flagEndGame = true;
-                    System.out.println("Поздравляем вы угадали число.");
+                    System.out.println(txtCongratulation);
                 } else {
                     System.out.println("\t- вы не угадали. Осталось попыток: " + (AttemptCount - tempCount));
                 }
             } while (!flagEndGame) ;
 
-            System.out.println("Повторить игру еще раз? 1 – да / 0 – нет");
+            System.out.println(msgForExit);
             int AnswerUser1 = getUserAnswer();
 
             switch (AnswerUser1) {
@@ -51,7 +51,7 @@ public class Main {
                 case 1:
                     break;
                 default:
-                    System.out.println("Вы ввели не определенное значение");
+                    System.out.println(txtUnidentifiedValue);
             }
         }
     }
@@ -59,8 +59,7 @@ public class Main {
     // Возвращаем случайное число в заданном диапазоне
     public static int getRandomNumber(int BorderNumber) {
         Random random = new Random();
-        int value = random.nextInt(BorderNumber);
-        return value;
+        return random.nextInt(BorderNumber);
     }
 
     public static int getUserAnswer() {
