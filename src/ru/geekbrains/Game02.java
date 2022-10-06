@@ -34,27 +34,26 @@ public class Game02 {
 
     // Печатаем загаданное слово
     private static String printGuessWord(String Str, String maskStr) {
-        String outputStr = "";
+        StringBuilder outputStr = new StringBuilder();
         int lengthStr = Str.length();
         for (int i = 0; i < 15; i++) {
             if (i < lengthStr) {
                 if (maskStr.charAt(i) == '1') {
-                    outputStr += Str.charAt(i);
+                    outputStr.append(Str.charAt(i));
                 } else {
-                    outputStr += "*";
+                    outputStr.append("*");
                 }
             } else {
-                outputStr += "*";
+                outputStr.append("*");
             }
         }
-        return outputStr;
+        return outputStr.toString();
     }
 
     // Возвращаем случайное число в заданном диапазоне
     public static int getRandomNumber(int TopBorder) {
         Random random = new Random();
-        int value = random.nextInt(TopBorder);
-        return value;
+        return random.nextInt(TopBorder);
     }
 
     // Сравниваем два слова посимвольно
@@ -64,7 +63,7 @@ public class Game02 {
         int lengthFirstWord = FirstWord.length();
         int lengthSecondWord  = SecondWord.length();
         // Цикл посимвольного сравнения будет по длине более короткого слова
-        int MaxLength = (lengthFirstWord > lengthSecondWord) ? lengthSecondWord : lengthFirstWord;
+        int MaxLength = Math.min(lengthFirstWord, lengthSecondWord);
         for (int i = 0; i < MaxLength; i++) {
             if (FirstWord.charAt(i) == SecondWord.charAt(i)) {
                 CountGuessed++;
